@@ -7,6 +7,8 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import Sidebar from "~/components/sidebar";
+import { cn } from "~/lib/utils";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -28,7 +30,16 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              {children}
+              <div className="flex h-screen overflow-hidden">
+                <Sidebar />
+                <main
+                  className={cn(
+                    "flex-1 overflow-y-auto p-4 transition-all duration-300 ease-in-out",
+                  )}
+                >
+                  {children}
+                </main>
+              </div>
             </ThemeProvider>
           </TRPCReactProvider>
         </ClerkProvider>
